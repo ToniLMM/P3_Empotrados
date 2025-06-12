@@ -118,7 +118,7 @@ if (Yvalue < 400) {
 
 ## Final result
 
-In the first video I forgot to prepare a product
+In the first video I forgot to prepare a product. In both videos you can see how I try to reset the state by holding the button down for 2 to 3 seconds, but it takes me a few attempts.
 
 https://github.com/user-attachments/assets/5216f6ac-1397-48da-8f25-6720fe715858
 
