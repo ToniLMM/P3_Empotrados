@@ -56,14 +56,14 @@ If the button is still pressed (LOW), Timer1 is started and the Watchdog is re-e
 
 My kit did not include male-female cables. That's why I had to put it directly on the breadboard. For this reason the axes in the code are inverted, to be able to show it more intuitively in the video.
 ```c
-Este es el eje X pero yo lo usaré como si fuera el Y
+// Este es el eje X pero yo lo usaré como si fuera el Y
 if (Xvalue < 400) {
     direction += "Abajo ";  
   } else if (Xvalue > 600) {
     direction += "Arriba ";  
   }
 
-Este es el eje Y pero yo lo usaré como si fuera el X
+// Este es el eje Y pero yo lo usaré como si fuera el X
 if (Yvalue < 400) {
   direction += "Izquierda ";  
 } else if (Yvalue > 600) {
