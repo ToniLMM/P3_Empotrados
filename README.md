@@ -22,9 +22,51 @@ This is my circuit diagram
 
 ## Explanation
 
+### Interruptions
+
+Interrupts allow the microcontroller to immediately respond to external events, without constantly checking (polling) its state inside the main loop().
+
+```c
+attachInterrupt(digitalPinToInterrupt(bot), button_pressed, CHANGE);
+```
+This line sets up an interrupt on the bot pin that calls the button_pressed() function whenever the pin state changes 
+
+
+```c
+if (digitalRead(bot) == HIGH) {
+  // Button released
+  if (pressing_time >= 5) {
+    // Long press → enter admin mode
+  } else if (pressing_time >= 2 && pressing_time < 3 && state == 1) {
+    // Medium press → restart normal flow
+  }
+  pressing_time = 0;
+} else {
+  // Button pressed
+  Timer1.start(); // Start counting how long the button is held
+}
+```
+This detects if the button was released (HIGH) or pressed (LOW) and responds accordingly.
+
+```c
+Timer1.initialize(1000000); // Every 1 second
+Timer1.attachInterrupt(timerCallback);
+Timer1.stop(); // It only starts when button is pressed
+```
+When the button is pressed, the timer is started (Timer1.start()).
+Every second, the timerCallback() function is triggered:
+
+```c
+void timerCallback() {
+  noInterrupts();
+  pressing_time++;
+}
+```
+This increases pressing_time each second the button is held down, allowing the code to determine whether it was a short, medium, or long press.
+
 ### Watchdog
 
-In this case, the Watchdog is used as a safeguard during the button press detection, to cover a specific scenario:
+The Watchdog is used as a safety mechanism to reset the microcontroller if something goes wrong while handling the physical button. 
  
 ```c
 void button_pressed() {
